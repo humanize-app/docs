@@ -1,5 +1,7 @@
 # Convo Documentation Content Plan
 
+> **Note (June 2026):** This plan predates the Convo → Humanize rebrand and the June 2026 feature update (segments & quotas, emotion analysis, supercuts, exporting). Kept for historical reference; paths and branding below are outdated.
+
 > **Purpose:** Actionable content plan for docs.useconvo.ai (Mintlify). Based on competitor audit (Conveo, Listen Labs, Outset) and Convo codebase feature audit.
 >
 > **Date:** March 2026

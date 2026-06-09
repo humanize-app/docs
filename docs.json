@@ -1,21 +1,24 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Convo Docs",
-  "description": "Documentation for Convo — the AI-moderated focus group platform.",
+  "name": "Humanize Docs",
+  "description": "Documentation for Humanize — AI-moderated qualitative research.",
   "colors": {
-    "primary": "#c44b25",
-    "light": "#e87b5d",
-    "dark": "#a33d1e"
+    "primary": "#2C5F8A",
+    "light": "#5B8AB5",
+    "dark": "#234C6E"
   },
   "background": {
-    "light": "#faf8f5",
-    "dark": "#1a1a1a"
+    "light": "#FFFEFE",
+    "dark": "#1A1A18"
   },
-  "favicon": "/images/convo1.svg",
+  "fonts": {
+    "family": "IBM Plex Sans"
+  },
+  "favicon": "/favicon.png",
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png"
   },
   "navigation": {
     "tabs": [
@@ -34,6 +37,7 @@
               "study/stimulus",
               "study/screeners",
               "study/recruiting-and-sessions",
+              "study/segments-and-quotas",
               "study/study-review"
             ]
           },
@@ -44,8 +48,10 @@
               "results/summary",
               "results/deep-dive",
               "results/themes",
-              "results/video-clips",
-              "results/explore"
+              "results/emotion-analysis",
+              "results/supercuts",
+              "results/explore",
+              "results/exporting"
             ]
           }
         ]
@@ -64,28 +70,34 @@
       "anchors": [
         {
           "anchor": "App",
-          "href": "https://convo.build",
+          "href": "https://go.humanize.app",
           "icon": "arrow-up-right-from-square"
         }
       ]
     }
   },
+  "redirects": [
+    {
+      "source": "/results/video-clips",
+      "destination": "/results/supercuts"
+    }
+  ],
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:support@useconvo.ai"
+        "href": "mailto:support@humanize.app"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Open App",
-      "href": "https://convo.build"
+      "href": "https://go.humanize.app"
     }
   },
   "footer": {
     "socials": {
-      "linkedin": "https://linkedin.com/company/useconvo"
+      "website": "https://humanize.app"
     }
   }
 }

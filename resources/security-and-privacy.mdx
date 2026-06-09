@@ -1,7 +1,7 @@
 ---
 title: Security and privacy
 sidebarTitle: Security & Privacy
-description: How Convo handles your data, recordings, and participant information.
+description: How Humanize handles your data, recordings, and participant information.
 ---
 
 ## Data storage
@@ -12,36 +12,44 @@ All data is encrypted in transit (TLS) and at rest. Study data — transcripts, 
 
 ## Recordings
 
-Session recordings are in secure cloud storage. Access URLs are time-limited, meaning:
+Session recordings and clips are in secure cloud storage with signed, time-limited playback URLs, meaning:
 
 - Recordings aren't publicly accessible
-- Links expire after a set period
+- Links expire after a set period — shared clip links expire after 24 hours
 - Only authenticated users with study access can view them
 
 ---
 
 ## Third-party services
 
-Convo uses a few third-party services:
+Humanize uses a few third-party services:
 
 - **Transcription** — a speech-to-text service processes session audio
 - **Text-to-speech** — generates the AI moderator's voice
-- **Video processing** — creates clips from recordings
-- **AI analysis** — large language models process transcripts to generate themes, summaries, and insights
+- **Video processing** — creates clips and supercuts from recordings
+- **AI analysis** — large language models process transcripts, audio, and video to generate themes, summaries, emotion analysis, and insights
 
 Data sent to these services is used only for processing your sessions. It's not used to train third-party models.
 
 ---
 
+## Compliance
+
+SOC 2 Type II certification is in progress, covering humanize.app, go.humanize.app, and the Humanize API. For our current security documentation, see [humanize.app/security](https://humanize.app/security).
+
+---
+
 ## Data retention
 
-Study data stays as long as your account is active. Archived studies remain accessible but aren't actively processed. Need something deleted? [Email us](mailto:support@useconvo.ai).
+Study data stays as long as your account is active. Archived studies remain accessible but aren't actively processed. Need something deleted? [Email us](mailto:support@humanize.app).
 
 ---
 
 ## Participant data
 
 Participant data includes name, email, screener responses, session recordings, and transcript contributions. It's scoped to your study and only accessible to users with permission. Not shared across studies or with other customers.
+
+Participants agree to the [study privacy policy](https://humanize.app/study-privacy) when they confirm their spot, before any session data is collected.
 
 ---
 
@@ -55,11 +63,11 @@ If you're researching with participants in the EEA:
 - Processing is covered by our data processing agreement
 
 <Info>
-  Need a DPA for your organization? [Email us](mailto:support@useconvo.ai) and we'll get one set up.
+  Need a DPA for your organization? [Email us](mailto:legal@humanize.app) and we'll get one set up.
 </Info>
 
 ---
 
 ## Questions?
 
-Security questions, vendor assessments, or specific requirements — email [support@useconvo.ai](mailto:support@useconvo.ai).
+Security questions, vendor assessments, or specific requirements — email [support@humanize.app](mailto:support@humanize.app).

@@ -22,9 +22,18 @@ The screener is a short questionnaire participants fill out before they can join
 
 ## Disqualification
 
-Mark specific answers as disqualifying. Anyone who picks a disqualifying answer gets screened out automatically and can't join sessions.
+Each multiple choice option gets an action: **Approve**, **Reject**, or (on multi-select) **Neutral**. Anyone who picks a rejecting answer gets screened out automatically and can't join sessions. Neutral options don't count for or against — they let people answer honestly without every choice affecting qualification.
 
-For example: if you're researching a mobile app, you might disqualify people who answer "I don't own a smartphone."
+For example: if you're researching a mobile app, you might reject people who answer "I don't own a smartphone."
+
+Multi-select questions can also limit how many options a participant picks: **Unlimited**, **Exact number**, or **Range**.
+
+## Option order
+
+Two toggles control how options appear to participants:
+
+- **Randomize order** — shuffles the options for each participant, which removes order bias
+- **Pin last** — keeps the final option in place while the rest shuffle. Use it for "None of the above."
 
 ## Tips for writing screeners
 
@@ -40,3 +49,7 @@ For example: if you're researching a mobile app, you might disqualify people who
 <Warning>
   The screener can't be changed once participants start responding. Get it right before you launch.
 </Warning>
+
+<Info>
+  Need a specific mix of participants, not just qualified ones? Build [segments and quotas](/study/segments-and-quotas) on top of your screener questions.
+</Info>
