@@ -1,0 +1,108 @@
+---
+title: Connect your client
+description: Add the Humanize MCP server to Claude, ChatGPT, Cursor, Codex, or VS Code.
+---
+
+Every client follows the same shape: point it at the server URL, then approve the connection when your browser opens.
+
+```
+https://go.humanize.app/api/mcp
+```
+
+## Claude
+
+<Tabs>
+  <Tab title="Claude app">
+    <Steps>
+      <Step title="Open connector settings">
+        Go to **Settings** → **Connectors** → **Add custom connector**.
+      </Step>
+      <Step title="Add the server">
+        Name it `Humanize` and paste `https://go.humanize.app/api/mcp` as the URL.
+      </Step>
+      <Step title="Connect">
+        Click **Connect**, sign in to Humanize, choose the workspace you want to expose, and approve.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Claude Code">
+    ```bash
+    claude mcp add --transport http humanize https://go.humanize.app/api/mcp
+    ```
+
+    Then run `/mcp` inside Claude Code and authenticate when prompted.
+  </Tab>
+</Tabs>
+
+## ChatGPT
+
+Add Humanize as a custom connector under **Settings** → **Connectors**, using the server URL above. Sign in and approve when the browser window opens.
+
+<Note>
+  Custom connectors in ChatGPT are limited to `search` and `fetch` unless you enable developer mode, which exposes the full tool set. Both tools work without it — `search` finds studies, themes, and quotes by keyword, and `fetch` pulls the full record — so deep research works out of the box.
+</Note>
+
+## Cursor
+
+Add Humanize to `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (this project only):
+
+```json
+{
+  "mcpServers": {
+    "humanize": {
+      "url": "https://go.humanize.app/api/mcp"
+    }
+  }
+}
+```
+
+Reload Cursor, open **Settings** → **MCP**, and click **Login** next to Humanize.
+
+## Codex
+
+```bash
+codex mcp add humanize --url https://go.humanize.app/api/mcp
+```
+
+## VS Code
+
+Add it to `.vscode/mcp.json`:
+
+```json
+{
+  "servers": {
+    "humanize": {
+      "type": "http",
+      "url": "https://go.humanize.app/api/mcp"
+    }
+  }
+}
+```
+
+## Other clients
+
+Any client that supports remote MCP servers over streamable HTTP with OAuth will work. It needs no manual client registration and no API key — point it at the server URL, and it discovers the sign-in flow on its own.
+
+## Verify it worked
+
+Ask your assistant: *"List the studies in my Humanize workspace."* You should get your studies back, newest first. If the list is empty but you know the workspace has studies, you likely selected a different workspace during sign-in — reconnect and pick the right one.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Sign-in succeeded, but every tool call fails">
+    Your token may have been issued without a workspace. Remove the connector, add it again, and make sure you select a workspace on the consent screen rather than skipping past it.
+  </Accordion>
+  <Accordion title="The connection worked before and now returns an authentication error">
+    Tokens expire and most clients refresh them silently. If yours can't, reconnect. This also happens if you were removed from the workspace — access follows your dashboard membership.
+  </Accordion>
+  <Accordion title="A study returns 'no analysis yet'">
+    The study exists, but its analysis hasn't finished. Findings tools (summary, themes, personas, question breakdown, participant responses) only return data after analysis completes. Study metadata and screener results are available before then.
+  </Accordion>
+  <Accordion title="A study or theme is 'not found'">
+    The id is wrong, the record was deleted, or it belongs to a workspace this connection doesn't cover. Have your assistant call `list_studies` to get current ids rather than reusing one from an old conversation.
+  </Accordion>
+  <Accordion title="Opening the server URL in a browser shows an error">
+    Expected. The endpoint accepts POST requests from MCP clients only; there's nothing to see in a browser.
+  </Accordion>
+</AccordionGroup>

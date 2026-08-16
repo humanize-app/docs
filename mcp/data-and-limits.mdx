@@ -1,0 +1,40 @@
+---
+title: Data and limits
+description: What the connection can reach, what it can't, and the limits that apply.
+---
+
+## What your assistant can reach
+
+Through MCP, an assistant reads the research layer of your workspace: studies and their discussion guides, analyzed findings, themes and quotes, personas, per-question breakdowns, participant response grids, and aggregate screener results. `ask_study` additionally reads full session transcripts to answer a specific question.
+
+Everything is scoped to the one workspace you selected when you connected, through the same access rules the dashboard enforces. There's no way for a connected client to reach a workspace you're not a member of.
+
+## What it can't
+
+**It can't write.** Every tool is read-only. Studies can't be created, edited, launched, or deleted; sessions can't be started or stopped; nothing about a participant can be changed. If you want to act on what you find, do it in the dashboard.
+
+**It can't identify participants.** Names, emails, and contact details are never returned. Quotes are attributed the way the dashboard attributes them — "Lapsed user, 38", "Participant #12" — and demographics come through bucketed, as an age range and a location rather than a birthdate and an address. Raw screener answer text isn't exposed either, only the aggregate distributions.
+
+**It can't reach media.** Recordings, video clips, and supercuts aren't part of this surface. Watch those in the dashboard or [export](/results/exporting) them.
+
+## Limits
+
+| | |
+|---|---|
+| `ask_study` | 50 questions per workspace per day, resetting at midnight UTC |
+| `list_studies` | 25 studies per page by default, 100 maximum; paginate with the cursor |
+| Everything else | No limit |
+
+The `ask_study` cap is per workspace, not per person — it's shared across everyone connected to it. Nothing else is capped, so structured questions about summaries, themes, personas, and responses stay available even after the cap is reached.
+
+## Privacy and retention
+
+Your assistant's provider — Anthropic, OpenAI, or whoever runs the client you connected — receives whatever the tools return, and it's covered by that provider's terms, not ours. This matters most for `ask_study`, which reads full transcripts. If your research is under a confidentiality agreement that restricts sending content to third-party AI providers, check it before connecting.
+
+On our side, every tool call is logged with the tool name, workspace, and outcome. Free-text arguments — your questions and search queries — are deliberately excluded from that log.
+
+For how we handle research data generally, see [Security and privacy](/resources/security-and-privacy).
+
+## Revoking access
+
+Remove the connector in your client to end its access. If you've connected from several clients, remove it from each one. Losing access to a workspace in Humanize also ends MCP access to it, with no further action needed.
