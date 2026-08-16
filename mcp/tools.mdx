@@ -1,0 +1,83 @@
+---
+title: Tools
+description: The twelve tools the Humanize MCP server exposes, and what each returns.
+---
+
+Your assistant picks tools on its own — you don't need to name them. This page is for when you want to know what's actually available, or why an answer looks the way it does.
+
+All twelve tools are read-only.
+
+## Studies
+
+<ResponseField name="list_studies" type="cursor · paginated">
+  The studies in your workspace, newest first. Each entry carries title, topic, research objectives, status, modality, locale, duration, group size, participant count, and `hasAnalysis` — the flag that tells your assistant whether findings exist yet.
+
+  Returns 25 studies by default, up to 100 per page. A non-null `nextCursor` means there's another page.
+</ResponseField>
+
+<ResponseField name="get_study" type="study_id">
+  One study in full: everything from the list, plus the discussion guide itself — each moment's script and goals, any stimulus shown — and session counts. Useful as context before reading findings, since it shows what participants were actually asked.
+</ResponseField>
+
+## Findings
+
+These need a completed analysis. Before that, they return a message saying so rather than empty data.
+
+<ResponseField name="get_study_summary" type="study_id">
+  The main results bundle: overview, key findings with supporting quotes, recommendations, suggested follow-up studies, and segment insights. The usual starting point for "what did we learn?"
+</ResponseField>
+
+<ResponseField name="list_themes" type="study_id">
+  Every theme from the study's latest analysis, with prevalence — how many participants out of the analyzed base expressed each one.
+</ResponseField>
+
+<ResponseField name="get_theme" type="study_id · theme_id">
+  One theme in depth: its definition, prevalence, and the verbatim participant quotes behind it.
+</ResponseField>
+
+<ResponseField name="get_question_breakdown" type="study_id">
+  The discussion guide question by question: per-question takeaway, summary, supporting quotes, and — where a stimulus was shown — how participants evaluated it.
+</ResponseField>
+
+<ResponseField name="get_personas" type="study_id">
+  Participant archetypes: name, tagline, description, bucketed demographics (age range and location), which participants belong to each, which themes they drove, and representative quotes.
+</ResponseField>
+
+<ResponseField name="get_participant_responses" type="study_id · participant_id?">
+  The participant-by-question grid — each participant's answer summary for each question, tagged with the themes it supports. Pass `participant_id` to narrow to one person. This is what makes "compare how participants differed on X" answerable.
+</ResponseField>
+
+## Screener
+
+<ResponseField name="get_screener_results" type="study_id">
+  Answer distributions for the closed-ended screener questions — multiple choice, rating scales, yes/no — with counts.
+
+  Available as soon as participants complete the screener, so you can read the population before sessions run.
+</ResponseField>
+
+## Search
+
+<ResponseField name="search" type="query">
+  Keyword search across the whole workspace: study titles and objectives, theme names and definitions, and participant quotes. Returns matching records with ids that `fetch` can expand.
+</ResponseField>
+
+<ResponseField name="fetch" type="id">
+  The full record behind a search result. A study id returns the study plus its analyzed summary; a theme id returns the theme with its supporting quotes.
+</ResponseField>
+
+## Open questions
+
+<ResponseField name="ask_study" type="study_id · question">
+  Ask anything about one study and get an answer grounded in the full data, including complete session transcripts. This is the same engine behind [Explore](/results/explore) in the dashboard.
+
+  It reads far more than the structured tools do, so it's slower and costlier. Your assistant should prefer `get_study_summary` or `get_theme` when those answer the question, and reach for this when the answer isn't in the analysis — something a participant mentioned in passing, a tangent nobody coded, the exact phrasing someone used.
+
+  Capped at **50 questions per workspace per day**, resetting at midnight UTC. Hitting the cap doesn't affect any other tool.
+</ResponseField>
+
+## Getting better answers
+
+- **Name the study.** "In the checkout study, what drove abandonment?" saves a round of searching.
+- **Ask for the evidence.** "…and quote the participants" pushes your assistant toward `get_theme`, which carries verbatims, over a summary-level answer.
+- **Ask across studies deliberately.** "Compare the themes from our last three pricing studies" is the kind of question this connection is genuinely better at than the dashboard.
+- **Push back on prevalence claims.** Themes carry real participant counts. If an answer says "most participants," ask for the number — it's there.

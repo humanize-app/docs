@@ -57,6 +57,19 @@
         ]
       },
       {
+        "tab": "MCP",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": ["mcp/overview", "mcp/connect"]
+          },
+          {
+            "group": "Reference",
+            "pages": ["mcp/tools", "mcp/data-and-limits"]
+          }
+        ]
+      },
+      {
         "tab": "Resources",
         "groups": [
           {

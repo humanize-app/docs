@@ -1,0 +1,60 @@
+---
+title: Humanize MCP
+description: Connect Claude, ChatGPT, Cursor, and other AI tools directly to your research.
+---
+
+The Humanize MCP server lets AI assistants read your research. Connect it once, then ask questions in the tool you already work in — no exporting, no copy-paste, no switching to the dashboard.
+
+**Server URL**
+
+```
+https://go.humanize.app/api/mcp
+```
+
+<Card title="Connect your client" icon="plug" href="/mcp/connect">
+  Setup for Claude, ChatGPT, Cursor, Codex, and VS Code — takes about a minute.
+</Card>
+
+## What you can do
+
+Once connected, your assistant can reach everything the dashboard shows for a study, minus participant identities.
+
+| You ask | It uses |
+|---------|---------|
+| "What studies have we run this year?" | `list_studies` |
+| "Summarize the findings from the onboarding study" | `get_study_summary` |
+| "Which themes came up most, and how many participants mentioned each?" | `list_themes`, `get_theme` |
+| "Pull the quotes about pricing objections" | `get_theme`, `search` |
+| "How did participants answer question 4?" | `get_question_breakdown` |
+| "What archetypes did we find?" | `get_personas` |
+| "Compare what participants said about delivery times" | `get_participant_responses` |
+| "How did the screener population break down?" | `get_screener_results` |
+| "Did anyone mention our competitor by name?" | `search`, `fetch` |
+| "Why did lapsed users churn, based on the transcripts?" | `ask_study` |
+
+Because your assistant can call several tools in one turn, the useful questions are the ones that cut across studies: *"We ran three studies on checkout — what did all of them agree on?"* Answering that by hand means opening three reports. Here it's one prompt.
+
+<Note>
+  **The connection is read-only.** Every tool reads; none of them create, edit, launch, or delete anything. An assistant cannot change your studies, publish a session, or touch participant data. The worst it can do is read something and get it wrong — which is why answers are worth spot-checking against the dashboard.
+</Note>
+
+## What you need
+
+- A Humanize account that belongs to a workspace
+- An MCP client that supports remote servers with OAuth — Claude, ChatGPT, Cursor, Codex, and VS Code all qualify
+
+You don't need an API key. Authentication runs through the same sign-in you use for the dashboard.
+
+## How access works
+
+When you connect, you sign in and pick one workspace. The connection is scoped to you and that workspace:
+
+- Your assistant sees exactly the studies you'd see in the dashboard, and nothing outside the workspace you selected.
+- To reach a second workspace, connect again and select it during sign-in.
+- Removing the connector from your client ends its access.
+
+## Good to know
+
+- **Findings need a completed analysis.** A study that hasn't finished analysis returns metadata and screener results, but no themes, personas, or summary. `list_studies` reports `hasAnalysis` for each study, so your assistant can check first.
+- **Results reflect the latest analysis.** If you re-run analysis, the tools return the new version.
+- **Participants are anonymized.** Quotes are attributed like "Lapsed user, 38" or "Participant #12" — never a real name or email. See [Data and limits](/mcp/data-and-limits).
